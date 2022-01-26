@@ -1,13 +1,13 @@
 # Deep-Neural-Network
 
-# Requirements:
+## Requirements:
 
 Numpy -- fundamental package for scientific computing with Python  
 matplotlib -- library to plot graphs with Python  
 h5py -- package to interact with a dataset that is stored on an H5 file  
 PIL -- Python Imaging Library to read image  
 
-# How to use
+## How to use
 Open command line at the folder, put your favourite cat picture in the folder, enter the command below  
 ```bash
 python main.py cat.jpg
