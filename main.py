@@ -7,16 +7,26 @@ from dnn_app_utils_v3 import *
 import sys
 
 #process argument
+image = "test.png"
+mode = 'A'
 try:
     image = str(sys.argv[1])
+    if len(sys.argv ) == 3:
+        mode = str(sys.argv[2])
 except IndexError as e:
-    print("Please enter picture name as argument")
-    exit(1)
+    print("You did not enter picture name, program will use test.png as default")
+
 
 plt.rcParams['figure.figsize'] = (5.0, 4.0) # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
 plt.rcParams['image.cmap'] = 'gray'
 
+def plot_costs(costs, learning_rate=0.0075):
+    plt.plot(np.squeeze(costs))
+    plt.ylabel('cost')
+    plt.xlabel('iterations (per hundreds)')
+    plt.title("Learning rate =" + str(learning_rate))
+    plt.show()
 
 np.random.seed(1)
 
@@ -45,12 +55,6 @@ test_x = test_x_flatten/255
 
 print ("train_x's shape: " + str(train_x.shape))
 print ("test_x's shape: " + str(test_x.shape))
-
-### CONSTANTS DEFINING THE MODEL ####
-n_x = 12288     # num_px * num_px * 3
-n_h = 7
-n_y = 1
-layers_dims = (n_x, n_h, n_y)
 
 # two_layer_model
 
@@ -123,19 +127,9 @@ def two_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 
             print("Cost after iteration {}: {}".format(i, np.squeeze(cost)))
         if print_cost and i % 100 == 0:
             costs.append(cost)
-       
-    # plot the cost
 
-    plt.plot(np.squeeze(costs))
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per hundreds)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
-    
-    return parameters
+    return parameters, costs     
 
-### CONSTANTS ###
-layers_dims = [12288, 20, 7, 5, 1] #  4-layer model
 
 # L_layer_model
 
@@ -182,16 +176,35 @@ def L_layer_model(X, Y, layers_dims, learning_rate = 0.0075, num_iterations = 30
         if print_cost and i % 100 == 0:
             costs.append(cost)
             
-    # plot the cost
-    plt.plot(np.squeeze(costs))
-    plt.ylabel('cost')
-    plt.xlabel('iterations (per hundreds)')
-    plt.title("Learning rate =" + str(learning_rate))
-    plt.show()
-    
-    return parameters
+    return parameters, costs
 
-parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = 2500, print_cost = True)
+
+if mode == 'L':
+    ### CONSTANTS ###
+    layers_dims = [12288, 20, 7, 5, 1] #  4-layer model 
+
+    parameters, costs = L_layer_model(train_x, train_y, layers_dims, num_iterations = 2500, print_cost = True)
+
+    plot_costs(costs)
+elif mode == 'T': 
+    ### CONSTANTS DEFINING THE MODEL ####
+    n_x = 12288     # num_px * num_px * 3
+    n_h = 7
+    n_y = 1
+    layers_dims = (n_x, n_h, n_y)
+    
+    parameters, costs = two_layer_model(train_x, train_y, layers_dims, num_iterations = 2500, print_cost = True)
+
+    plot_costs(costs)
+else:
+    print("You did not enter L or T as argument, it will run L layer by default")
+
+    ### CONSTANTS ###
+    layers_dims = [12288, 20, 7, 5, 1] #  4-layer model 
+
+    parameters, costs = L_layer_model(train_x, train_y, layers_dims, num_iterations = 2500, print_cost = True)
+
+    plot_costs(costs)
 
 pred_train = predict(train_x, train_y, parameters)
 
