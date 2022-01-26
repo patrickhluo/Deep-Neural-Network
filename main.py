@@ -4,6 +4,14 @@ import h5py
 import matplotlib.pyplot as plt
 from PIL import Image
 from dnn_app_utils_v3 import *
+import sys
+
+#process argument
+try:
+    image = str(sys.argv[1])
+except IndexError as e:
+    print("Please enter picture name as argument")
+    exit(1)
 
 plt.rcParams['figure.figsize'] = (5.0, 4.0) # set default size of plots
 plt.rcParams['image.interpolation'] = 'nearest'
@@ -13,11 +21,6 @@ plt.rcParams['image.cmap'] = 'gray'
 np.random.seed(1)
 
 train_x_orig, train_y, test_x_orig, test_y, classes = load_data()
-
-# Example of a picture
-index = 25
-plt.imshow(train_x_orig[index])
-print ("y = " + str(train_y[0,index]) + ". It's a " + classes[train_y[0,index]].decode("utf-8") +  " picture.")
 
 # Explore your dataset 
 m_train = train_x_orig.shape[0]
@@ -194,9 +197,7 @@ pred_train = predict(train_x, train_y, parameters)
 
 pred_test = predict(test_x, test_y, parameters)
 
-from PIL import Image
-
-fileImage = Image.open("test.png").convert("RGB").resize([num_px,num_px],Image.ANTIALIAS)
+fileImage = Image.open(image).convert("RGB").resize([num_px,num_px],Image.ANTIALIAS)
 my_label_y = [1] # the true class of your image (1 -> cat, 0 -> non-cat)
 
 image = np.array(fileImage)
