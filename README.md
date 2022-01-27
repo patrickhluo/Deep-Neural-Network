@@ -14,7 +14,7 @@ python main.py cat.jpg T
 ```  
 replace 'cat.jpg' with your cat pic name  
 
-Note that since the training data set uses pictures in square, so the program will resize your cat picture to square, so it your picture is a rectangle, it might squeeze the picture so the result will be inaccurate. Recommand to resize the picture manually to get the best result.
+Note that since the training data set uses pictures in square, so the program will resize your cat picture to square, so if your picture is a rectangle, it might squeeze the picture so the result will be inaccurate. Recommand to resize the picture manually to get the best result.
 
 The last letter 'T' indicates two layer model, 'L' indicates L layer model
 
