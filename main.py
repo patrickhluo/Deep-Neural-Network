@@ -1,6 +1,4 @@
-import time
 import numpy as np
-import h5py
 import matplotlib.pyplot as plt
 from PIL import Image
 from dnn_app_utils_v3 import *
