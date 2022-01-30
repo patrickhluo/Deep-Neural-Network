@@ -1,4 +1,8 @@
-# Deep-Neural-Network
+## Web App
+
+The trained deep neural network parameters are stroed in npy files, the web app will be using stored data to predict your picture
+
+Please visit http://cat-scanner.patrickluo.com/ to use the app 
 
 ## Requirements:
 
@@ -8,6 +12,7 @@ h5py -- package to interact with a dataset that is stored on an H5 file
 PIL -- Python Imaging Library to read image  
 
 ## How to use
+
 Open command line at the folder, put your favourite cat picture in the folder, enter the command below  
 ```bash
 python main.py cat.jpg T
