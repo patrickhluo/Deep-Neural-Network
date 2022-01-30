@@ -28,7 +28,7 @@ def show_predict_page():
 
     layer = st.selectbox('Layers',box)
     st.sidebar.header('Cropper Toolbox')
-    realtime_update = st.sidebar.checkbox(label="Update in Real Time", value=False)
+    realtime_update = st.sidebar.checkbox(label="Update in Real Time", value=True)
     box_color = st.sidebar.color_picker(label="Box Color", value='#0000FF')
     aspect_ratio = (1, 1)
     image_file = crop_image(st.file_uploader("Upload Images", type=["png","jpg","jpeg"]),realtime_update , box_color, aspect_ratio)
