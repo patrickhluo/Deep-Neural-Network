@@ -16,8 +16,7 @@ def crop_image(image, realtime_update,box_color,aspect_ratio):
 
         # Manipulate cropped image at will
         st.write("Preview")
-        _ = cropped_img.thumbnail((150,150))
-        st.image(cropped_img)
+        _ = cropped_img.thumbnail((300,300))
         return cropped_img
 
 def show_predict_page():
@@ -28,6 +27,7 @@ def show_predict_page():
     box = ['Two layers', 'L layer']
 
     layer = st.selectbox('Layers',box)
+    st.sidebar.header('Cropper Toolbox')
     realtime_update = st.sidebar.checkbox(label="Update in Real Time", value=False)
     box_color = st.sidebar.color_picker(label="Box Color", value='#0000FF')
     aspect_ratio = (1, 1)
@@ -36,6 +36,8 @@ def show_predict_page():
 
         # To View Uploaded Image
         num_px = 64
+        ##preview
+        st.write('## Preview')
         st.image(image_file)
         image = image_file.convert("RGB").resize([num_px,num_px],Image.ANTIALIAS)
         my_label_y = [1] # the true class of your image (1 -> cat, 0 -> non-cat)
@@ -50,8 +52,8 @@ def show_predict_page():
             parameters = np.load('Lparameters.npy', allow_pickle=True).item()
 
         my_predicted_image = main.predict(my_image, my_label_y, parameters)
-        result = ("y = " + str(np.squeeze(my_predicted_image)) + ", your %s model predicts a \""%layer + main.classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
-
+        # result = ("# y = " + str(np.squeeze(my_predicted_image)) + ", your %s model predicts a \""%layer + main.classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
+        result = ("### The %s model predicts a \""%layer + main.classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
 
         st.write(result)
 
