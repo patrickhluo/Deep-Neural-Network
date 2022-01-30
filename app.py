@@ -24,7 +24,7 @@ def show_predict_page():
 
     st.write('### we need some cat pic to predict')
     
-    box = ['Two Layers', 'L Layer']
+    box = ['L Layer', 'Two Layers']
 
     layer = st.selectbox('Layers',box)
     st.sidebar.header('Cropper Toolbox')
