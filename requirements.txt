@@ -3,3 +3,4 @@ matplotlib
 h5py
 streamlit
 pillow
+streamlit-cropper

@@ -50,7 +50,7 @@ def show_predict_page():
             parameters = np.load('Lparameters.npy', allow_pickle=True).item()
 
         my_predicted_image = main.predict(my_image, my_label_y, parameters)
-        result = ("y = " + str(np.squeeze(my_predicted_image)) + ", your L-layer model predicts a \"" + main.classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
+        result = ("y = " + str(np.squeeze(my_predicted_image)) + ", your %s model predicts a \""%layer + main.classes[int(np.squeeze(my_predicted_image)),].decode("utf-8") +  "\" picture.")
 
 
         st.write(result)
