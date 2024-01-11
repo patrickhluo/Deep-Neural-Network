@@ -2,7 +2,7 @@
 
 The trained deep neural network parameters are stroed in npy files, the web app will be using stored data to predict your picture
 
-Please visit http://cat-scanner.patrickluo.com/ to use the app 
+Please visit http://patrickluo.com/cat-scanner to use the app 
 
 ## Requirements:
 
